@@ -5,12 +5,14 @@ import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
 import BottomNav from './components/BottomNav/BottomNav';
 
 import RegisterForm from './components/RegisterForm/RegisterForm';
+import LoginForm from './components/LoginForm/LoginForm';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <RegisterForm />
+        <LoginForm />
+        {/* <RegisterForm /> */}
         {/* <SimpleAppBar /> */}
         {/* <AppContent /> */}
         {/* <BottomNav /> */}
