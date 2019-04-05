@@ -1,8 +1,15 @@
 import dispatcher from '../dispatcher';
 
-export const exampleAction = param => {
+export const registerAction = user => {
   dispatcher.dispatch({
-    type: 'ACTION_TYPE',
-    payload: param
+    type: 'REGISTER_USER',
+    payload: user
+  });
+};
+
+export const loginAction = user => {
+  dispatcher.dispatch({
+    type: 'LOGIN_USER',
+    payload: user
   });
 };

@@ -13,6 +13,8 @@ import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import FAQ from './components/FAQ/FAQ';
 import Chat from './components/Chat/Chat';
+import RegisterForm from './components/RegisterForm/RegisterForm';
+import LoginForm from './components/LoginForm/LoginForm';
 
 class App extends Component {
   render() {
