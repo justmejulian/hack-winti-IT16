@@ -1,8 +1,5 @@
 const express = require("express");
 const app = express();
-<<<<<<< HEAD
-const bodyParser = require("body-parser");
-=======
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 
@@ -18,7 +15,6 @@ app.all('/*', (req, res, next) => {
   );
   next();
 });
->>>>>>> master
 
 app.use(bodyParser.json());
 
