@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.sass';
 
 import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
 import BottomNav from './components/BottomNav/BottomNav';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './BottomNav.css';
+import './BottomNav.sass';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -25,11 +25,11 @@ class BottomNav extends Component {
         value={value}
         onChange={this.handleChange}
         showLabels
-        className="BottomNav"
+        className='BottomNav'
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label='Recents' icon={<RestoreIcon />} />
+        <BottomNavigationAction label='Favorites' icon={<FavoriteIcon />} />
+        <BottomNavigationAction label='Nearby' icon={<LocationOnIcon />} />
       </BottomNavigation>
     );
   }
