@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './LoginForm.sass';
 
+import history from '../../history';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -26,7 +28,7 @@ class LoginForm extends Component {
   };
 
   gotoRegister = e => {
-    //TODO
+    history.push('/register');
   };
 
   render() {
