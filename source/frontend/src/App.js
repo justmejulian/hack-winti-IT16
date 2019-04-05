@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.sass';
+import 'typeface-roboto';
 
 import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
 import BottomNav from './components/BottomNav/BottomNav';
