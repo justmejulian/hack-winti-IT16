@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './App.sass';
 import 'typeface-roboto';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import history from './history';
+
+import { Router, Route } from 'react-router-dom';
 
 import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
 import BottomNav from './components/BottomNav/BottomNav';
@@ -17,11 +19,11 @@ class App extends Component {
     return (
       <div className='App'>
         <SimpleAppBar />
-        <Router>
+        <Router history={history}>
           <Route exact path='/' component={Home} />
-          <Route path='/faq' component={FAQ} />
-          <Route path='/chat' component={Chat} />
-          <Route path='/game' component={Game} />
+          <Route exact path='/faq' component={FAQ} />
+          <Route exact path='/chat' component={Chat} />
+          <Route exact path='/game' component={Game} />
         </Router>
         <BottomNav />
       </div>

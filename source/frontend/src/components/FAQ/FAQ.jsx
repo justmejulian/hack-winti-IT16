@@ -11,7 +11,7 @@ class FAQ extends Component {
 
   render() {
     return (
-      <div className='FAG'>
+      <div className='FAQ'>
         <h1>FAQ</h1>
       </div>
     );

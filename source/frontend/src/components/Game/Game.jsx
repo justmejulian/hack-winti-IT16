@@ -11,7 +11,7 @@ class Game extends Component {
 
   render() {
     return (
-      <div className='FAG'>
+      <div className='Game'>
         <h1>Game</h1>
       </div>
     );
