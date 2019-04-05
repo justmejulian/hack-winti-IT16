@@ -1,7 +1,9 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const Datastore = require('nedb');
+const db = new Datastore({ filename: 'path/to/datafile' });
 
 app.use(bodyParser.json());
 
@@ -16,18 +18,22 @@ app.all('/*', (req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
-
-// Persistent datastore with manual loading
-var Datastore = require("nedb"),
-  db = new Datastore({ filename: "path/to/datafile" });
 db.loadDatabase(function(err) {
   // Callback is optional
   // Now commands will be executed
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+// REGISTER NEW USER
+app.post('/api/auth/register', function(req, res) {
+  const registerDetails = {
+    username: req.body.username,
+    password: req.body.password
+  };
+  console.log('register', registerDetails);
+
+  db.insert(registerDetails, function(err, newUser) {
+    res.status(200).json({ message: 'Registration successful.' });
+  });
 });
 
 // AUTHENTICATION
@@ -36,6 +42,7 @@ app.post('/api/auth/login', function(req, res) {
     username: req.body.username,
     password: req.body.password
   };
+  console.log('login', loginDetails);
 
   if (!isValidCredentials(loginDetails)) {
     res.status(401).json({ message: 'Authentication failed. User not found.' });
@@ -51,8 +58,9 @@ app.post('/api/auth/login', function(req, res) {
 });
 
 function isValidCredentials({ username, password }) {
-  // TODO hardcoded user credentials
-  return username === 'test' && password === 'test';
+  db.find({ username: username, password: password }, function(err, docs) {
+    return docs.length !== 0;
+  });
 }
 
 // START APP
@@ -64,7 +72,7 @@ const server = app.listen(8080, () => {
 });
 
 // nedb-test insert
-app.post("/nedb-insert", (req, res) => {
+app.post('/send-message', (req, res) => {
   let docToInsert = req.body;
   console.log(docToInsert);
   db.insert(docToInsert, function(err, newDocs) {
@@ -74,18 +82,19 @@ app.post("/nedb-insert", (req, res) => {
 });
 
 // nedb-test read
-app.post("/nedb-read", (req, res) => {
-  let searchString = req.body;
-  db.find(searchString, function(err, docs) {
+app.get('/get-messages/:uid', (req, res) => {
+  const uid = req.params.uid;
+  db.find(uid, function(err, docs) {
     res.json(docs);
   });
 });
 
-// nedb delete
-app.get("/nedb-delete", (req, res) => {
-  db.remove({ }, { multi: true }, function (err, numRemoved) {
-    db.loadDatabase(function (err) {
-      res.json("deleted database");
-    });
-  });
-});
+// DANGER ZONE
+// // nedb delete
+// app.get('/nedb-delete', (req, res) => {
+//   db.remove({}, { multi: true }, function(err, numRemoved) {
+//     db.loadDatabase(function(err) {
+//       res.json('deleted database');
+//     });
+//   });
+// });
