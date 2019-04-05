@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/justmejulian/hack-winti-IT16#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nedb": "^1.8.0"
   }
 }
