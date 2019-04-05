@@ -20,6 +20,10 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+<<<<<<< HEAD
     "nedb": "^1.8.0"
+=======
+    "jsonwebtoken": "^8.5.1"
+>>>>>>> master
   }
 }
