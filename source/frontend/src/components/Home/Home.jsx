@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import LoginForm from '../LoginForm/LoginForm';
+
+import { Redirect } from 'react-router-dom';
+
 import './Home.sass';
 
 class Home extends Component {
@@ -10,6 +14,9 @@ class Home extends Component {
   };
 
   render() {
+    if (this.state.loggedIn) {
+      return <Redirect to='/LoginForm' />;
+    }
     return (
       <div className='Home'>
         <h1>Home</h1>

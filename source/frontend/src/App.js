@@ -4,7 +4,7 @@ import 'typeface-roboto';
 
 import history from './history';
 
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 
 import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
 import BottomNav from './components/BottomNav/BottomNav';
@@ -17,6 +17,10 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 
 class App extends Component {
+  state = {
+    loggedIn: true
+  };
+
   render() {
     return (
       <div className='App'>
@@ -26,6 +30,7 @@ class App extends Component {
           <Route exact path='/faq' component={FAQ} />
           <Route exact path='/chat' component={Chat} />
           <Route exact path='/game' component={Game} />
+          <Route path='/login' component={LoginForm} />
         </Router>
         <BottomNav />
       </div>
