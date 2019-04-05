@@ -9,7 +9,7 @@ import { registerAction } from '../../actions/GlobalActions';
 
 class RegisterForm extends Component {
   state = {
-    userName: 'testUser',
+    username: 'testUser',
     password: 'testPassword',
     passwordConfirm: 'testPassword',
     validationError: false
@@ -17,9 +17,9 @@ class RegisterForm extends Component {
 
   handleRegister = e => {
     e.preventDefault();
-    const { userName, password, passwordConfirm } = this.state;
+    const { username, password, passwordConfirm } = this.state;
     if (password.valueOf() == passwordConfirm.valueOf()) {
-      const user = { userName, password };
+      const user = { username, password };
       registerAction(user);
     } else {
       this.setState({ validationError: true });
@@ -31,7 +31,7 @@ class RegisterForm extends Component {
   };
 
   render() {
-    const { userName, password, passwordConfirm } = this.state;
+    const { username, password, passwordConfirm } = this.state;
     return (
       <div className="RegisterForm">
         <TextField
@@ -42,7 +42,7 @@ class RegisterForm extends Component {
           autoComplete="user"
           margin="normal"
           variant="outlined"
-          value={userName}
+          value={username}
           onChange={this.handleInput}
         />
         <TextField

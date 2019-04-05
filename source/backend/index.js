@@ -37,29 +37,32 @@ app.post('/api/auth/register', function(req, res) {
 });
 
 // AUTHENTICATION
-app.post('/api/auth/login', function(req, res) {
+app.post('/api/auth/login', async function(req, res) {
   const loginDetails = {
     username: req.body.username,
     password: req.body.password
   };
   console.log('login', loginDetails);
-
-  if (!isValidCredentials(loginDetails)) {
+  const isValid = await isValidCredentials(loginDetails);
+  if (!isValid) {
     res.status(401).json({ message: 'Authentication failed. User not found.' });
+  } else {
+    const jwtToken = jwt.sign(
+      { username: loginDetails.username },
+      'supersecretkey'
+    );
+    res.status(200).json({
+      jwtToken: jwtToken
+    });
   }
-  const jwtToken = jwt.sign(
-    { username: loginDetails.username },
-    'supersecretkey'
-  );
-
-  res.json({
-    jwtToken: jwtToken
-  });
 });
 
 function isValidCredentials({ username, password }) {
-  db.find({ username: username, password: password }, function(err, docs) {
-    return docs.length !== 0;
+  return new Promise(function(resolve, reject) {
+    db.find({ username: username, password: password }, function(err, docs) {
+      const doesRecordExist = docs.length !== 0;
+      resolve(doesRecordExist);
+    });
   });
 }
 

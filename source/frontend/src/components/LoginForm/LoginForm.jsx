@@ -9,15 +9,15 @@ import { loginAction } from '../../actions/GlobalActions';
 
 class LoginForm extends Component {
   state = {
-    userName: 'testUser',
+    username: 'testUser',
     password: 'testPassword',
     authError: false
   };
 
   handleLogin = e => {
     e.preventDefault();
-    const { userName, password } = this.state;
-    const user = { userName, password };
+    const { username, password } = this.state;
+    const user = { username, password };
     loginAction(user);
   };
 
@@ -30,18 +30,18 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { userName, password } = this.state;
+    const { username, password } = this.state;
     return (
       <div className="LoginForm">
         <TextField
           label="Username"
           className="TextField"
           type="user"
-          name="userName"
+          name="username"
           autoComplete="user"
           margin="normal"
           variant="outlined"
-          value={userName}
+          value={username}
           onChange={this.handleInput}
         />
         <TextField
