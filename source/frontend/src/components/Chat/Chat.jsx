@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import './FAQ.sass';
+import './Chat.sass';
 
-class FAQ extends Component {
+class Chat extends Component {
   state = {};
 
   handleChange = (event, value) => {
@@ -12,10 +12,10 @@ class FAQ extends Component {
   render() {
     return (
       <div className='FAG'>
-        <h1>FAQ</h1>
+        <h1>Chat</h1>
       </div>
     );
   }
 }
 
-export default FAQ;
+export default Chat;
