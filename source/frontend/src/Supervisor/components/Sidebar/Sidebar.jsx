@@ -34,7 +34,7 @@ class Sidebar extends Component {
         history.push('/');
         break;
       case 1:
-        history.push('/faq');
+        history.push('/reminder');
         break;
       case 2:
         history.push('/chat');
@@ -48,28 +48,34 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <div className="Sidebar">
+      <div className='Sidebar'>
         <List>
           <ListItem button onClick={() => this.updateViewState(0)}>
             <ListItemIcon>
-              <Home />(
+              <Home />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary='Home' />
           </ListItem>
           <ListItem button onClick={() => this.updateViewState(2)}>
             <ListItemIcon>
               <ChatIcon />
             </ListItemIcon>
-            <ListItemText primary="Chat" />
+            <ListItemText primary='Chats' />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <SupervisorAccount />
             </ListItemIcon>
-            <ListItemText primary="Clients" />
+            <ListItemText primary='Manage Clients' />
+          </ListItem>
+          <ListItem button onClick={() => this.updateViewState(1)}>
+            <ListItemIcon>
+              <SupervisorAccount />
+            </ListItemIcon>
+            <ListItemText primary='Reminders' />
           </ListItem>
         </List>
-        <Button variant="outlined" onClick={this.handleLogout}>
+        <Button variant='outlined' onClick={this.handleLogout}>
           Logout
         </Button>
       </div>

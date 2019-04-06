@@ -64,7 +64,7 @@ class App extends Component {
               </div>
             ) : (
               <div className={'App Supervisor'}>
-                <SimpleAppBar title='Social Helper' />
+                <SimpleAppBar />
                 <Sidebar />
                 <Component {...props} className='content' />
               </div>

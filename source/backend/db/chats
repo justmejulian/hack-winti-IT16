@@ -1,1 +1,3 @@
 {"chatId":"12","messages":[{"user":1,"message":"Hey"},[{"user":1,"message":"How you doing"}]],"_id":"fOH1aBNoiC3eoWlO"}
+{"chatId":"12","messages":[{"user":1,"message":"Hey"},[{"user":1,"message":"How you doing"}],{"user":2,"message":"dsfg"}],"_id":"fOH1aBNoiC3eoWlO"}
+{"chatId":"12","messages":[{"user":1,"message":"Hey"},[{"user":1,"message":"How you doing"}],{"user":2,"message":"dsfg"},{"user":2,"message":"asdf"}],"_id":"fOH1aBNoiC3eoWlO"}
