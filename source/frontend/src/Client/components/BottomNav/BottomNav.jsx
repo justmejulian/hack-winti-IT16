@@ -47,10 +47,34 @@ class BottomNav extends Component {
         showLabels
         className='BottomNav'
       >
-        <BottomNavigationAction label='Home' icon={<Home />} />
-        <BottomNavigationAction label='FAQ' icon={<SupervisorAccount />} />
-        <BottomNavigationAction label='Chat' icon={<Chat />} />
-        <BottomNavigationAction label='Game' icon={<VideogameAsset />} />
+        <BottomNavigationAction
+          classes={{
+            selected: 'BottomNavigationAction-selected'
+          }}
+          label='Home'
+          icon={<Home />}
+        />
+        <BottomNavigationAction
+          classes={{
+            selected: 'BottomNavigationAction-selected'
+          }}
+          label='FAQ'
+          icon={<SupervisorAccount />}
+        />
+        <BottomNavigationAction
+          classes={{
+            selected: 'BottomNavigationAction-selected'
+          }}
+          label='Chat'
+          icon={<Chat />}
+        />
+        <BottomNavigationAction
+          classes={{
+            selected: 'BottomNavigationAction-selected'
+          }}
+          label='Game'
+          icon={<VideogameAsset />}
+        />
       </BottomNavigation>
     );
   }

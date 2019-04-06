@@ -51,7 +51,7 @@ class Game extends Component {
         <div className='Score'>Your Score: 42</div>
         <List className={styles.root}>
           <ListItem>
-            <Avatar>
+            <Avatar className='divider'>
               <AlarmIcon />
             </Avatar>
             <ListItemText
@@ -59,9 +59,9 @@ class Game extends Component {
               secondary='April 5, 2019 | 8 Points'
             />
           </ListItem>
-          <Divider />
+          <Divider className='divider' />
           <ListItem>
-            <Avatar>
+            <Avatar className='divider'>
               <WorkIcon />
             </Avatar>
             <ListItemText
@@ -69,9 +69,9 @@ class Game extends Component {
               secondary='April 2, 2019 | 22 Points'
             />
           </ListItem>
-          <Divider />
+          <Divider className='divider' />
           <ListItem>
-            <Avatar>
+            <Avatar className='divider'>
               <ClockIcon />
             </Avatar>
             <ListItemText
@@ -79,7 +79,7 @@ class Game extends Component {
               secondary='March 30, 2019 | 12 Points'
             />
           </ListItem>
-          <Divider />
+          <Divider className='divider' />
         </List>
       </div>
     );

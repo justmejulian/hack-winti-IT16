@@ -51,13 +51,25 @@ class Sidebar extends Component {
       <div className='Sidebar'>
         <div>
           <List>
-            <ListItem button onClick={() => this.updateViewState(0)}>
+            <ListItem
+              classes={{
+                selected: 'BottomNavigationAction-selected'
+              }}
+              button
+              onClick={() => this.updateViewState(0)}
+            >
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
               <ListItemText primary='Home' />
             </ListItem>
-            <ListItem button onClick={() => this.updateViewState(2)}>
+            <ListItem
+              classes={{
+                selected: 'BottomNavigationAction-selected'
+              }}
+              button
+              onClick={() => this.updateViewState(2)}
+            >
               <ListItemIcon>
                 <ChatIcon />
               </ListItemIcon>
@@ -69,7 +81,13 @@ class Sidebar extends Component {
               </ListItemIcon>
               <ListItemText primary='Manage Clients' />
             </ListItem>
-            <ListItem button onClick={() => this.updateViewState(1)}>
+            <ListItem
+              classes={{
+                selected: 'BottomNavigationAction-selected'
+              }}
+              button
+              onClick={() => this.updateViewState(1)}
+            >
               <ListItemIcon>
                 <Event />
               </ListItemIcon>

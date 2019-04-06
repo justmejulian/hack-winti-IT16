@@ -48,33 +48,39 @@ class LoginForm extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div className="LoginForm">
+      <div className='LoginForm'>
         <FormHeader />
         <TextField
-          label="Username"
-          className="TextField"
-          type="user"
-          name="username"
-          autoComplete="user"
-          margin="normal"
-          variant="outlined"
+          label='Username'
+          classes={{
+            root: 'TextField',
+            focused: 'Input-focused'
+          }}
+          type='user'
+          name='username'
+          autoComplete='user'
+          margin='normal'
+          variant='outlined'
           value={username}
           onChange={this.handleInput}
         />
         <TextField
-          label="Password"
-          className="TextField"
-          type="password"
-          name="password"
-          autoComplete="password"
-          margin="normal"
-          variant="outlined"
+          label='Password'
+          classes={{
+            root: 'TextField',
+            focused: 'Input-focused'
+          }}
+          type='password'
+          name='password'
+          autoComplete='password'
+          margin='normal'
+          variant='outlined'
           value={password}
           onChange={this.handleInput}
         />
         <Button
-          variant="outlined"
-          className="LoginButton"
+          variant='outlined'
+          className='LoginButton'
           onClick={this.handleLogin}
         >
           Login

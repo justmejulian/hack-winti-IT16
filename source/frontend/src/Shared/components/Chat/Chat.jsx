@@ -123,6 +123,9 @@ class Chat extends Component {
         </div>
 
         <ChatInput
+          classes={{
+            focused: 'Input-focused'
+          }}
           value={this.state.chatInput}
           onKeyPress={this.handleKeyPress}
           onChange={this.handleInputChange}
