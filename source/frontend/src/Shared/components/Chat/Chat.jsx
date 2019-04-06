@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 import globalStore from '../../../Shared/stores/GlobalStore';
 
 import './Chat.sass';
+import NotificationModal from '../../../Client/components/NotificationModal/NotificationModal';
 
 const ChatBubble = ({ user, message }) => {
   console.log(user);
@@ -90,6 +91,7 @@ class Chat extends Component {
   render() {
     return (
       <div className='Chat'>
+        <NotificationModal />
         <div className='chat-messages'>
           {this.state.messages.map(m => (
             <ChatBubble key={m.mid} user={m.user} message={m.message} />
