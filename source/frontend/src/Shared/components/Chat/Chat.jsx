@@ -9,7 +9,11 @@ import globalStore from '../../../Shared/stores/GlobalStore';
 import './Chat.sass';
 
 const ChatBubble = ({ user, message }) => {
-  const bubbleOwner = user === 'me' ? 'blue-chat-bubble' : 'white-chat-bubble';
+  console.log(user);
+  const bubbleOwner =
+    user.valueOf() == globalStore.uuid.valueOf()
+      ? 'blue-chat-bubble'
+      : 'white-chat-bubble';
   return <span className={bubbleOwner}>{message}</span>;
 };
 
@@ -36,18 +40,8 @@ const ChatInput = ({ value, onChange, onClick }) => {
   );
 };
 class Chat extends Component {
-  messages = [
-    { mid: '1', user: 'supervisor', message: 'Hey' },
-    { mid: '2', user: 'supervisor', message: 'How are you today?' },
-    {
-      mid: '3',
-      user: 'supervisor',
-      message: `Don't forget your appointment at 2 o'clock`
-    }
-  ];
-
   state = {
-    messages: this.messages,
+    messages: [],
     chatInput: '',
     socket: io('http://localhost:8080')
   };
@@ -58,6 +52,9 @@ class Chat extends Component {
       this.state.socket.emit('join', { type: globalStore.userType });
       this.state.socket.on('getMsg', data => {
         console.log('message:', data);
+        this.setState(prevState => ({
+          messages: [...prevState.messages, data]
+        }));
       });
     });
   }
@@ -76,8 +73,7 @@ class Chat extends Component {
     };
     this.state.socket.emit('message', {
       type: globalStore.userType,
-      message: newMessage,
-      chatId: '12'
+      message: newMessage
     });
     this.setState(prevState => ({
       chatInput: '',
