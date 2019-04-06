@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import RewardModal from '../../../Client/components/RewardModal/RewardModal';
+
 import io from 'socket.io-client';
 import globalStore from '../../../Shared/stores/GlobalStore';
 
@@ -95,6 +97,10 @@ class Chat extends Component {
   render() {
     return (
       <div className="Chat">
+        <RewardModal
+          isVisible={this.state.isModalVisible}
+          handleCloseModal={this.handleCloseModal}
+        />
         <div className="chat-messages">
           {this.state.messages.map(m => (
             <ChatBubble key={m.mid} user={m.user} message={m.message} />

@@ -3,15 +3,15 @@ import { Button } from '@material-ui/core';
 
 import './RewardModal.sass';
 
-const RewardModal = ({ visible, playAnimation, onClose }) => {
+const RewardModal = ({ isVisible, playAnimation, handleCloseModal }) => {
   return (
     <div>
-      {visible && (
-        <div className='modal'>
-          <div className='modal-main'>
+      {isVisible && (
+        <div className="modal">
+          <div className="modal-main">
             <h2>Congratulations</h2>
             <Button onClick={() => playAnimation()}>Collect Rewards</Button>
-            <Button onClick={() => onClose()}>Dismiss</Button>
+            <Button onClick={handleCloseModal}>Dismiss</Button>
           </div>
         </div>
       )}
