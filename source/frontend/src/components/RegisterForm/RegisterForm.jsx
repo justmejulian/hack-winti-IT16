@@ -31,49 +31,50 @@ class RegisterForm extends Component {
   };
 
   handleInput = e => {
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     const { username, password, passwordConfirm } = this.state;
     return (
-      <div className='RegisterForm'>
+      <div className="RegisterForm">
         <TextField
-          label='Username'
-          className='TextField'
-          type='user'
-          name='userName'
-          autoComplete='user'
-          margin='normal'
-          variant='outlined'
+          label="Username"
+          className="TextField"
+          type="user"
+          name="username"
+          autoComplete="user"
+          margin="normal"
+          variant="outlined"
           value={username}
           onChange={this.handleInput}
         />
         <TextField
-          label='Password'
-          className='TextField'
-          type='password'
-          name='password'
-          autoComplete='password'
-          margin='normal'
-          variant='outlined'
+          label="Password"
+          className="TextField"
+          type="password"
+          name="password"
+          autoComplete="password"
+          margin="normal"
+          variant="outlined"
           value={password}
           onChange={this.handleInput}
         />
         <TextField
-          label='Confirm Password'
-          className='TextField'
-          type='password'
-          name='passwordConfirm'
-          autoComplete='password'
-          margin='normal'
-          variant='outlined'
+          label="Confirm Password"
+          className="TextField"
+          type="password"
+          name="passwordConfirm"
+          autoComplete="password"
+          margin="normal"
+          variant="outlined"
           value={passwordConfirm}
           onChange={this.handleInput}
         />
         <Button
-          variant='outlined'
-          className='RegisterButton'
+          variant="outlined"
+          className="RegisterButton"
           onClick={this.handleRegister}
         >
           Register
