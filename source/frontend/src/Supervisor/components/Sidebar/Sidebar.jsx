@@ -49,32 +49,34 @@ class Sidebar extends Component {
   render() {
     return (
       <div className='Sidebar'>
-        <List>
-          <ListItem button onClick={() => this.updateViewState(0)}>
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary='Home' />
-          </ListItem>
-          <ListItem button onClick={() => this.updateViewState(2)}>
-            <ListItemIcon>
-              <ChatIcon />
-            </ListItemIcon>
-            <ListItemText primary='Chats' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <SupervisorAccount />
-            </ListItemIcon>
-            <ListItemText primary='Manage Clients' />
-          </ListItem>
-          <ListItem button onClick={() => this.updateViewState(1)}>
-            <ListItemIcon>
-              <Event />
-            </ListItemIcon>
-            <ListItemText primary='Reminders' />
-          </ListItem>
-        </List>
+        <div>
+          <List>
+            <ListItem button onClick={() => this.updateViewState(0)}>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary='Home' />
+            </ListItem>
+            <ListItem button onClick={() => this.updateViewState(2)}>
+              <ListItemIcon>
+                <ChatIcon />
+              </ListItemIcon>
+              <ListItemText primary='Chats' />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <SupervisorAccount />
+              </ListItemIcon>
+              <ListItemText primary='Manage Clients' />
+            </ListItem>
+            <ListItem button onClick={() => this.updateViewState(1)}>
+              <ListItemIcon>
+                <Event />
+              </ListItemIcon>
+              <ListItemText primary='Reminders' />
+            </ListItem>
+          </List>
+        </div>
         <Button variant='outlined' onClick={this.handleLogout}>
           Logout
         </Button>

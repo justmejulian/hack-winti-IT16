@@ -14,9 +14,7 @@ class SimpleAppBar extends Component {
       <div className='SimpleAppBar'>
         <AppBar position='static' color='default'>
           <Toolbar>
-            <Typography variant='h6' color='inherit'>
-              <FormHeader />
-            </Typography>
+            <FormHeader />
           </Toolbar>
         </AppBar>
       </div>
