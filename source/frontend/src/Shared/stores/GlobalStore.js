@@ -9,7 +9,7 @@ class GlobalStore extends EventEmitter {
   constructor() {
     super();
     this.loggedIn = false;
-
+    this.userType = '';
     this.username = '';
     this.uuid = '';
   }
@@ -32,6 +32,7 @@ class GlobalStore extends EventEmitter {
 
         this.username = decoded.username;
         this.uuid = decoded.uuid;
+        this.userType = decoded.userType;
         // Todo: store in index db
 
         this.emit('user_logged_in');

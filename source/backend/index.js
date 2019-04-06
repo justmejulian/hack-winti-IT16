@@ -11,11 +11,16 @@ const socket = require('socket.io');
 
 const io = socket.listen(server);
 
-io.on('connection', function(client) {
+io.on('connection', function(con) {
+  con.join('room');
   console.log('Client connected...');
-
-  client.on('join', function(data) {
-    console.log(data);
+  con.on('message', data => {
+    console.log('message received', data);
+    if (data.type == 'client') {
+      con.to('room').emit('getMsg', data.message);
+    } else {
+      con.to('room').emit('getMsg', data.message);
+    }
   });
 });
 
@@ -45,30 +50,30 @@ dbUsers.loadDatabase(function(err) {
 dbChats.loadDatabase();
 
 // REGISTER NEW USER
-app.post('/api/auth/register', async function(req, res) {
-  const registerDetails = {
-    uuid: uuidv1(),
-    username: req.body.username,
-    password: req.body.password
-  };
-  console.log('register', registerDetails);
-  const isAllowed = await isRegisterAllowed(registerDetails);
-  if (!isAllowed) {
-    res
-      .status(400)
-      .json({ message: 'Registration failed. User already exists.' });
-  } else {
-    dbUsers.insert(registerDetails, function(err, newUser) {
-      const jwtToken = jwt.sign(
-        { uuid: registerDetails.uuid, username: registerDetails.username },
-        'supersecretkey'
-      );
-      res.status(200).json({
-        jwtToken: jwtToken
-      });
-    });
-  }
-});
+// app.post('/api/auth/register', async function(req, res) {
+//   const registerDetails = {
+//     uuid: uuidv1(),
+//     username: req.body.username,
+//     password: req.body.password
+//   };
+//   console.log('register', registerDetails);
+//   const isAllowed = await isRegisterAllowed(registerDetails);
+//   if (!isAllowed) {
+//     res
+//       .status(400)
+//       .json({ message: 'Registration failed. User already exists.' });
+//   } else {
+//     dbUsers.insert(registerDetails, function(err, newUser) {
+//       const jwtToken = jwt.sign(
+//         { uuid: registerDetails.uuid, username: registerDetails.username },
+//         'supersecretkey'
+//       );
+//       res.status(200).json({
+//         jwtToken: jwtToken
+//       });
+//     });
+//   }
+// });
 
 // AUTHENTICATION
 app.post('/api/auth/login', async function(req, res) {
@@ -82,10 +87,11 @@ app.post('/api/auth/login', async function(req, res) {
     res.status(401).json({ message: 'Authentication failed. User not found.' });
   } else {
     const user = docs[0];
-    const { uuid } = user;
+    const { uuid, userType } = user;
     const jwtToken = jwt.sign(
       {
         uuid: uuid,
+        userType: userType,
         username: loginDetails.username
       },
       'supersecretkey'
@@ -152,6 +158,25 @@ app.get('/api/get-messages/:sid/:uid', (req, res) => {
     res.json(chat);
   });
 });
+
+// app.post('/api/send-message/', (req, res) => {
+//   const message = {
+//     type: req.body.type,
+//     content: req.body.content,
+//     from: req.body.from
+//   };
+//   const uid = req.body.uid;
+//   const sid = req.body.sid;
+//   dbChats.insert(registerDetails, function(err, newUser) {
+//     const jwtToken = jwt.sign(
+//       { uuid: registerDetails.uuid, username: registerDetails.username },
+//       'supersecretkey'
+//     );
+//     res.status(200).json({
+//       jwtToken: jwtToken
+//     });
+//   });
+// });
 
 const port = 8080;
 

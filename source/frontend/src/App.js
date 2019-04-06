@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './App.sass';
 import 'typeface-roboto';
 
-import socket from './socket';
-
 import history from './Shared/history';
 
 import globalStore from './Shared/stores/GlobalStore';
@@ -31,12 +29,6 @@ class App extends Component {
     loggedIn: globalStore.loggedIn
   };
 
-  componentDidMount() {
-    socket.on('connect', function(data) {
-      socket.emit('join', 'Hello World from client');
-    });
-  }
-
   componentWillMount() {
     globalStore.on('user_logged_in', this.login);
   }
@@ -48,7 +40,7 @@ class App extends Component {
   login = () => {
     this.setState({
       loggedIn: globalStore.loggedIn,
-      userType: 'client'
+      userType: globalStore.userType
     });
   };
 
