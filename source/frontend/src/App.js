@@ -17,16 +17,19 @@ import BottomNav from './Client/components/BottomNav/BottomNav';
 
 import NotFoundContainer from './Supervisor/components/NotFoundContainer/NotFoundContainer';
 
-import Home from './Supervisor/components/Home/Home';
-import Game from './Supervisor/components/Game/Game';
-import FAQ from './Supervisor/components/FAQ/FAQ';
-import Chat from './Supervisor/components/Chat/Chat';
+import Home from './Shared/components/Home/Home';
+
+import Game from './Client/components/Game/Game';
+import FAQ from './Client/components/FAQ/FAQ';
+import Chat from './Client/components/Chat/Chat';
+
 import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
 import LoginForm from './Shared/components/LoginForm/LoginForm';
 
 class App extends Component {
   state = {
-    loggedIn: globalStore.loggedIn
+    loggedIn: globalStore.loggedIn,
+    userType: ''
   };
 
   componentWillMount() {
@@ -40,7 +43,7 @@ class App extends Component {
   login = () => {
     this.setState({
       loggedIn: globalStore.loggedIn,
-      userType: 'client'
+      userType: 'Supervisor'
     });
   };
 

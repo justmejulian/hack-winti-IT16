@@ -13,3 +13,9 @@ export const loginAction = user => {
     payload: user
   });
 };
+
+export const logoutAction = () => {
+  dispatcher.dispatch({
+    type: 'LOGOUT_USER'
+  });
+};
