@@ -9,13 +9,14 @@ import { loginAction } from './Shared/actions/GlobalActions';
 
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import SupervisorSimpleAppBar from './Supervisor/components/SimpleAppBar/SimpleAppBar';
 import Sidebar from './Supervisor/components/Sidebar/Sidebar';
 
 import SimpleAppBar from './Client/components/SimpleAppBar/SimpleAppBar';
 import BottomNav from './Client/components/BottomNav/BottomNav';
 
 import NotFoundContainer from './Supervisor/components/NotFoundContainer/NotFoundContainer';
+
+import Reminders from './Supervisor/components/Reminders/Reminders';
 
 import Home from './Shared/components/Home/Home';
 
@@ -86,6 +87,7 @@ class App extends Component {
           <SecretRoute exact path='/faq' component={FAQ} />
           <SecretRoute exact path='/chat' component={Chat} />
           <SecretRoute exact path='/game' component={Game} />
+          <SecretRoute exact path='/reminders' component={Reminders} />
           <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>
