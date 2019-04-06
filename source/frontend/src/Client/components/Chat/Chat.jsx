@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 import './Chat.sass';
 
 const ChatBubble = ({ user, message }) => {
@@ -9,16 +12,23 @@ const ChatBubble = ({ user, message }) => {
 
 const ChatInput = ({ value, onChange, onClick }) => {
   return (
-    <div className="bottom-chat-input">
-      <input
-        className="bottom-chat-input-field"
-        type="text"
+    <div className='bottom-chat-input'>
+      <TextField
+        className='MessageInput'
+        name='message'
+        autoComplete='user'
+        margin='normal'
+        variant='outlined'
         value={value}
         onChange={e => onChange(e)}
       />
-      <button className="bottom-chat-submit-button" onClick={() => onClick()}>
+      <Button
+        variant='outlined'
+        className='bottom-chat-submit-button'
+        onClick={() => onClick()}
+      >
         submit
-      </button>
+      </Button>
     </div>
   );
 };
@@ -49,9 +59,9 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="Chat">
+      <div className='Chat'>
         <h1>Chat</h1>
-        <div className="chat-messages">
+        <div className='chat-messages'>
           {this.state.messages.map(m => (
             <ChatBubble user={m.user} message={m.message} />
           ))}
