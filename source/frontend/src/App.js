@@ -4,6 +4,9 @@ import 'typeface-roboto';
 
 import history from './history';
 
+import globalStore from './stores/GlobalStore';
+import { loginAction } from './actions/GlobalActions';
+
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
@@ -20,10 +23,26 @@ import LoginForm from './components/LoginForm/LoginForm';
 
 class App extends Component {
   state = {
-    loggedIn: false
+    loggedIn: globalStore.loggedIn
+  };
+
+  componentWillMount() {
+    globalStore.on('user_logged_in', this.login);
+  }
+
+  componentWillUnmount() {
+    globalStore.removeListener('user_logged_in', this.login);
+  }
+
+  login = () => {
+    this.setState({
+      loggedIn: globalStore.loggedIn
+    });
   };
 
   render() {
+    console.log(this.state.loggedIn);
+
     const SecretRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
@@ -44,6 +63,7 @@ class App extends Component {
         }
       />
     );
+
     return (
       <div className='App'>
         <Router history={history}>

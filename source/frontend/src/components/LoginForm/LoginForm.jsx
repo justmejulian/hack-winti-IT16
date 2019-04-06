@@ -16,6 +16,18 @@ class LoginForm extends Component {
     authError: false
   };
 
+  componentWillMount() {
+    globalStore.on('user_logged_in', this.login);
+  }
+
+  componentWillUnmount() {
+    globalStore.removeListener('user_logged_in', this.login);
+  }
+
+  login = () => {
+    history.push('/');
+  };
+
   handleLogin = e => {
     e.preventDefault();
     const { username, password } = this.state;
@@ -34,39 +46,39 @@ class LoginForm extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div className="LoginForm">
+      <div className='LoginForm'>
         <TextField
-          label="Username"
-          className="TextField"
-          type="user"
-          name="username"
-          autoComplete="user"
-          margin="normal"
-          variant="outlined"
+          label='Username'
+          className='TextField'
+          type='user'
+          name='username'
+          autoComplete='user'
+          margin='normal'
+          variant='outlined'
           value={username}
           onChange={this.handleInput}
         />
         <TextField
-          label="Password"
-          className="TextField"
-          type="password"
-          name="password"
-          autoComplete="password"
-          margin="normal"
-          variant="outlined"
+          label='Password'
+          className='TextField'
+          type='password'
+          name='password'
+          autoComplete='password'
+          margin='normal'
+          variant='outlined'
           value={password}
           onChange={this.handleInput}
         />
         <Button
-          variant="outlined"
-          className="LoginButton"
+          variant='outlined'
+          className='LoginButton'
           onClick={this.handleLogin}
         >
           Login
         </Button>
         <Button
-          variant="outlined"
-          className="NewAccountButton"
+          variant='outlined'
+          className='NewAccountButton'
           onClick={this.gotoRegister}
         >
           Create Account
