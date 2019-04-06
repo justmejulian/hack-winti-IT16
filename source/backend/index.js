@@ -42,7 +42,7 @@ app.post('/api/auth/register', async function(req, res) {
       .status(400)
       .json({ message: 'Registration failed. User already exists.' });
   } else {
-    db.insert(registerDetails, function(err, newUser) {
+    dbUsers.insert(registerDetails, function(err, newUser) {
       const jwtToken = jwt.sign(
         { uuid: registerDetails.uuid, username: registerDetails.username },
         'supersecretkey'
@@ -82,7 +82,7 @@ app.post('/api/auth/login', async function(req, res) {
 
 function isValidCredentials({ username, password }) {
   return new Promise(function(resolve, reject) {
-    db.find({ username: username, password: password }, function(err, docs) {
+    dbUsers.find({ username: username, password: password }, function(err, docs) {
       const isValid = docs.length !== 0;
       resolve({ docs, isValid });
     });
@@ -91,7 +91,7 @@ function isValidCredentials({ username, password }) {
 
 function isRegisterAllowed({ username, password }) {
   return new Promise(function(resolve, reject) {
-    db.find({ username: username, password: password }, function(err, docs) {
+    dbUsers.find({ username: username, password: password }, function(err, docs) {
       const doesRecordExist = docs.length === 0;
       resolve(doesRecordExist);
     });
