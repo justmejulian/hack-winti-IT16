@@ -49,7 +49,8 @@ app.post('/api/auth/register', async function(req, res) {
   const registerDetails = {
     uuid: uuidv1(),
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    score: 0
   };
   console.log('register', registerDetails);
   const isAllowed = await isRegisterAllowed(registerDetails);
@@ -154,6 +155,17 @@ app.get('/api/get-messages/:sid/:uid', (req, res) => {
 });
 
 const port = 8080;
+
+// GAMIFICATION
+app.post('/api/set-user-score/:uid/', (req, res) => {
+  const uid = req.params.uid;
+  const score = req.body.score;
+  dbUsers.update({ uuid: uid }, { $set: { score: score } }, { multi: false }, function (err, numReplaced) {
+    if (numReplaced === 1) {
+      res.json("update successful");
+    }
+  });
+});
 
 // START APP
 server.listen(port, () => {
