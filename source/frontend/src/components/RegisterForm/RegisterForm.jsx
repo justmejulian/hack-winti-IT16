@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './RegisterForm.sass';
 
+import history from '../../history';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -21,6 +23,8 @@ class RegisterForm extends Component {
     if (password.valueOf() == passwordConfirm.valueOf()) {
       const user = { username, password };
       registerAction(user);
+      // Todo: not successful register
+      history.push('/login');
     } else {
       this.setState({ validationError: true });
     }
@@ -33,43 +37,43 @@ class RegisterForm extends Component {
   render() {
     const { username, password, passwordConfirm } = this.state;
     return (
-      <div className="RegisterForm">
+      <div className='RegisterForm'>
         <TextField
-          label="Username"
-          className="TextField"
-          type="user"
-          name="userName"
-          autoComplete="user"
-          margin="normal"
-          variant="outlined"
+          label='Username'
+          className='TextField'
+          type='user'
+          name='userName'
+          autoComplete='user'
+          margin='normal'
+          variant='outlined'
           value={username}
           onChange={this.handleInput}
         />
         <TextField
-          label="Password"
-          className="TextField"
-          type="password"
-          name="password"
-          autoComplete="password"
-          margin="normal"
-          variant="outlined"
+          label='Password'
+          className='TextField'
+          type='password'
+          name='password'
+          autoComplete='password'
+          margin='normal'
+          variant='outlined'
           value={password}
           onChange={this.handleInput}
         />
         <TextField
-          label="Confirm Password"
-          className="TextField"
-          type="password"
-          name="passwordConfirm"
-          autoComplete="password"
-          margin="normal"
-          variant="outlined"
+          label='Confirm Password'
+          className='TextField'
+          type='password'
+          name='passwordConfirm'
+          autoComplete='password'
+          margin='normal'
+          variant='outlined'
           value={passwordConfirm}
           onChange={this.handleInput}
         />
         <Button
-          variant="outlined"
-          className="RegisterButton"
+          variant='outlined'
+          className='RegisterButton'
           onClick={this.handleRegister}
         >
           Register
