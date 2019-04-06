@@ -17,9 +17,9 @@ import BottomNav from './Client/components/BottomNav/BottomNav';
 
 import NotFoundContainer from './Supervisor/components/NotFoundContainer/NotFoundContainer';
 
-import Home from './Supervisor/components/Home/Home';
-import Game from './Supervisor/components/Game/Game';
-import FAQ from './Supervisor/components/FAQ/FAQ';
+import Home from './Client/components/Home/Home';
+import Game from './Client/components/Game/Game';
+import FAQ from './Client/components/FAQ/FAQ';
 import Chat from './Supervisor/components/Chat/Chat';
 import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
 import LoginForm from './Shared/components/LoginForm/LoginForm';

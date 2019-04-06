@@ -12,7 +12,7 @@ class FAQ extends Component {
   render() {
     return (
       <div className={'FAQ ' + this.props.className}>
-        <h1>FAQ</h1>
+        <h1>Test</h1>
       </div>
     );
   }
