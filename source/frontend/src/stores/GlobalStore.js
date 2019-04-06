@@ -31,6 +31,7 @@ class GlobalStore extends EventEmitter {
 
         this.username = decoded.username;
         console.log('this.username: ', this.username);
+        // Todo: store in index db
 
         this.emit('user_logged_in');
         break;
