@@ -20,19 +20,19 @@ const ChatBubble = ({ user, message }) => {
 
 const ChatInput = ({ value, onChange, onClick }) => {
   return (
-    <div className='bottom-chat-input'>
+    <div className="bottom-chat-input">
       <TextField
-        className='MessageInput'
-        name='message'
-        autoComplete='user'
-        margin='normal'
-        variant='outlined'
+        className="MessageInput"
+        name="message"
+        autoComplete="user"
+        margin="normal"
+        variant="outlined"
         value={value}
         onChange={e => onChange(e)}
       />
       <Button
-        variant='outlined'
-        className='bottom-chat-submit-button'
+        variant="outlined"
+        className="bottom-chat-submit-button"
         onClick={() => onClick()}
       >
         submit
@@ -44,6 +44,7 @@ class Chat extends Component {
   state = {
     messages: [],
     chatInput: '',
+    isModalVisible: false,
     socket: io('http://localhost:8080')
   };
 
@@ -60,7 +61,7 @@ class Chat extends Component {
       this.state.socket.on('getChallenge', data => {
         console.log('challenge:', data);
         setTimeout(() => {
-          //TODO: show duys modal with setState
+          this.setState({ isModalVisible: true });
         }, 10000);
       });
     });
@@ -88,11 +89,18 @@ class Chat extends Component {
     }));
   };
 
+  handleCloseModal = () => {
+    this.setState({ isModalVisible: false });
+  };
+
   render() {
     return (
-      <div className='Chat'>
-        <NotificationModal />
-        <div className='chat-messages'>
+      <div className="Chat">
+        <NotificationModal
+          isVisible={this.state.isModalVisible}
+          handleCloseModal={this.handleCloseModal}
+        />
+        <div className="chat-messages">
           {this.state.messages.map(m => (
             <ChatBubble key={m.mid} user={m.user} message={m.message} />
           ))}
