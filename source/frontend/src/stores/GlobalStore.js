@@ -11,6 +11,7 @@ class GlobalStore extends EventEmitter {
     this.loggedIn = false;
 
     this.username = '';
+    this.uuid = '';
   }
 
   async handleActions(action) {
@@ -30,7 +31,7 @@ class GlobalStore extends EventEmitter {
         this.loggedIn = true;
 
         this.username = decoded.username;
-        console.log('this.username: ', this.username);
+        this.uuid = decoded.uuid;
         // Todo: store in index db
 
         this.emit('user_logged_in');
