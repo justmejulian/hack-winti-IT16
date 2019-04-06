@@ -22,7 +22,7 @@ import Home from './Shared/components/Home/Home';
 
 import Game from './Client/components/Game/Game';
 import FAQ from './Client/components/FAQ/FAQ';
-import Chat from './Client/components/Chat/Chat';
+import Chat from './Shared/components/Chat/Chat';
 
 import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
 import LoginForm from './Shared/components/LoginForm/LoginForm';

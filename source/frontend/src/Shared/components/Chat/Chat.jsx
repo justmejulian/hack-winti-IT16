@@ -76,7 +76,8 @@ class Chat extends Component {
     };
     this.state.socket.emit('message', {
       type: globalStore.userType,
-      message: newMessage
+      message: newMessage,
+      chatId: '12'
     });
     this.setState(prevState => ({
       chatInput: '',
