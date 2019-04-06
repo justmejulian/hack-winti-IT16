@@ -3,7 +3,6 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const Datastore = require('nedb');
-const db = new Datastore({ filename: 'path/to/datafile' });
 const uuidv1 = require('uuid/v1');
 const cors = require('cors');
 
@@ -20,6 +19,9 @@ io.on('connection', function(client) {
   });
 });
 
+const dbChats = new Datastore({ filename: 'db/chats' });
+const dbUsers = new Datastore({ filename: 'db/users' });
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -35,10 +37,12 @@ app.all('/*', (req, res, next) => {
   next();
 });
 
-db.loadDatabase(function(err) {
+dbUsers.loadDatabase(function(err) {
   // Callback is optional
   // Now commands will be executed
 });
+
+dbChats.loadDatabase();
 
 // REGISTER NEW USER
 app.post('/api/auth/register', async function(req, res) {
@@ -54,7 +58,7 @@ app.post('/api/auth/register', async function(req, res) {
       .status(400)
       .json({ message: 'Registration failed. User already exists.' });
   } else {
-    db.insert(registerDetails, function(err, newUser) {
+    dbUsers.insert(registerDetails, function(err, newUser) {
       const jwtToken = jwt.sign(
         { uuid: registerDetails.uuid, username: registerDetails.username },
         'supersecretkey'
@@ -94,7 +98,10 @@ app.post('/api/auth/login', async function(req, res) {
 
 function isValidCredentials({ username, password }) {
   return new Promise(function(resolve, reject) {
-    db.find({ username: username, password: password }, function(err, docs) {
+    dbUsers.find({ username: username, password: password }, function(
+      err,
+      docs
+    ) {
       const isValid = docs.length !== 0;
       resolve({ docs, isValid });
     });
@@ -103,15 +110,52 @@ function isValidCredentials({ username, password }) {
 
 function isRegisterAllowed({ username, password }) {
   return new Promise(function(resolve, reject) {
-    db.find({ username: username, password: password }, function(err, docs) {
+    dbUsers.find({ username: username, password: password }, function(
+      err,
+      docs
+    ) {
       const doesRecordExist = docs.length === 0;
       resolve(doesRecordExist);
     });
   });
 }
 
+// CHAT STUFF
+app.get('/api/get-chats/:sid', (req, res) => {
+  const sid = req.params.sid;
+  const searchQuery = { users: sid };
+  dbChats.find(searchQuery, function(err, chats) {
+    let response = [];
+    for (let chatID in chats) {
+      response.push({ chatID: chatID, users: chats[chatID].users });
+    }
+    res.json(response);
+  });
+});
+
+app.get('/api/get-messages/:uid', (req, res) => {
+  const uid = req.params.uid;
+  const searchQuery = { uuid: uid };
+  dbUsers.findOne(searchQuery, function(err, user) {
+    console.log(user.chats[0]);
+    dbChats.findOne({ id: user.chats[0] }, function(err, chat) {
+      res.json(chat.messages);
+    });
+  });
+});
+
+app.get('/api/get-messages/:sid/:uid', (req, res) => {
+  const sid = req.params.sid;
+  const uid = req.params.uid;
+  const searchQuery = { users: [sid, uid] };
+  dbChats.findOne(searchQuery, function(err, chat) {
+    res.json(chat);
+  });
+});
+
 const port = 8080;
 
+// START APP
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
@@ -120,7 +164,7 @@ server.listen(port, () => {
 app.post('/send-message', (req, res) => {
   let docToInsert = req.body;
   console.log(docToInsert);
-  db.insert(docToInsert, function(err, newDocs) {
+  dbUsers.insert(docToInsert, function(err, newDocs) {
     // newDocs is an array with these documents, augmented with their _id
     res.json(newDocs);
   });
@@ -129,7 +173,7 @@ app.post('/send-message', (req, res) => {
 // nedb-test read
 app.get('/get-messages/:uid', (req, res) => {
   const uid = req.params.uid;
-  db.find(uid, function(err, docs) {
+  dbUsers.find(uid, function(err, docs) {
     res.json(docs);
   });
 });
