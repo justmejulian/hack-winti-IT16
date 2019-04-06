@@ -29,43 +29,72 @@ dbUsers.loadDatabase(function(err) {
 dbChats.loadDatabase();
 
 // REGISTER NEW USER
-app.post('/api/auth/register', function(req, res) {
+app.post('/api/auth/register', async function(req, res) {
   const registerDetails = {
     uuid: uuidv1(),
     username: req.body.username,
     password: req.body.password
   };
   console.log('register', registerDetails);
-
-  dbUsers.insert(registerDetails, function(err, newUser) {
-    res.status(200).json({ message: 'Registration successful.' });
-  });
+  const isAllowed = await isRegisterAllowed(registerDetails);
+  if (!isAllowed) {
+    res
+      .status(400)
+      .json({ message: 'Registration failed. User already exists.' });
+  } else {
+    db.insert(registerDetails, function(err, newUser) {
+      const jwtToken = jwt.sign(
+        { uuid: registerDetails.uuid, username: registerDetails.username },
+        'supersecretkey'
+      );
+      res.status(200).json({
+        jwtToken: jwtToken
+      });
+    });
+  }
 });
 
 // AUTHENTICATION
-app.post('/api/auth/login', function(req, res) {
+app.post('/api/auth/login', async function(req, res) {
   const loginDetails = {
     username: req.body.username,
     password: req.body.password
   };
   console.log('login', loginDetails);
-
-  if (!isValidCredentials(loginDetails)) {
+  const { docs, isValid } = await isValidCredentials(loginDetails);
+  if (!isValid) {
     res.status(401).json({ message: 'Authentication failed. User not found.' });
+  } else {
+    const user = docs[0];
+    const { uuid } = user;
+    const jwtToken = jwt.sign(
+      {
+        uuid: uuid,
+        username: loginDetails.username
+      },
+      'supersecretkey'
+    );
+    res.status(200).json({
+      jwtToken: jwtToken
+    });
   }
-  const jwtToken = jwt.sign(
-    { username: loginDetails.username },
-    'supersecretkey'
-  );
-
-  res.json({
-    jwtToken: jwtToken
-  });
 });
 
 function isValidCredentials({ username, password }) {
-  dbUsers.find({ username: username, password: password }, function(err, docs) {
-    return docs.length !== 0;
+  return new Promise(function(resolve, reject) {
+    db.find({ username: username, password: password }, function(err, docs) {
+      const isValid = docs.length !== 0;
+      resolve({ docs, isValid });
+    });
+  });
+}
+
+function isRegisterAllowed({ username, password }) {
+  return new Promise(function(resolve, reject) {
+    db.find({ username: username, password: password }, function(err, docs) {
+      const doesRecordExist = docs.length === 0;
+      resolve(doesRecordExist);
+    });
   });
 }
 
