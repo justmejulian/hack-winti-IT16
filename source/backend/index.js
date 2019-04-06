@@ -40,7 +40,7 @@ app.post('/api/auth/register', async function(req, res) {
   } else {
     db.insert(registerDetails, function(err, newUser) {
       const jwtToken = jwt.sign(
-        { username: loginDetails.username },
+        { username: registerDetails.username },
         'supersecretkey'
       );
       res.status(200).json({
