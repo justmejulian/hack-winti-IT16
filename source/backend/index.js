@@ -16,11 +16,7 @@ io.on('connection', function(con) {
   console.log('Client connected...');
   con.on('message', data => {
     console.log('message received', data);
-    if (data.type == 'client') {
-      con.to('room').emit('getMsg', data.message);
-    } else {
-      con.to('room').emit('getMsg', data.message);
-    }
+    con.to('room').emit('getMsg', data.message);
   });
 });
 
