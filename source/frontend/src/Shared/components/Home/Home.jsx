@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import './Game.sass';
+import './Home.sass';
 
-class Game extends Component {
+class Home extends Component {
   state = {};
 
   handleChange = (event, value) => {
@@ -11,11 +11,11 @@ class Game extends Component {
 
   render() {
     return (
-      <div className={'Game ' + this.props.className}>
-        <h1>Game</h1>
+      <div className={'Home ' + this.props.className}>
+        <h1>Home</h1>
       </div>
     );
   }
 }
 
-export default Game;
+export default Home;

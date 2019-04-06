@@ -36,6 +36,15 @@ class GlobalStore extends EventEmitter {
 
         this.emit('user_logged_in');
         break;
+      case 'LOGOUT_USER':
+        this.loggedIn = false;
+
+        this.username = '';
+        this.uuid = '';
+        // Todo: store in index db
+
+        this.emit('user_logged_in');
+        break;
     }
   }
 }
