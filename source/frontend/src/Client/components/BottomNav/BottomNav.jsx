@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './BottomNav.sass';
 
-import history from '../../history';
+import history from '../../../Shared/history';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
