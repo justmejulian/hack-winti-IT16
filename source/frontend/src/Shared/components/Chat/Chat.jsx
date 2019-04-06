@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import history from '../../../Shared/history';
+
 import RewardModal from '../../../Client/components/RewardModal/RewardModal';
 
 import io from 'socket.io-client';
@@ -21,19 +23,19 @@ const ChatBubble = ({ user, message }) => {
 
 const ChatInput = ({ value, onChange, onClick }) => {
   return (
-    <div className="bottom-chat-input">
+    <div className='bottom-chat-input'>
       <TextField
-        className="MessageInput"
-        name="message"
-        autoComplete="user"
-        margin="normal"
-        variant="outlined"
+        className='MessageInput'
+        name='message'
+        autoComplete='user'
+        margin='normal'
+        variant='outlined'
         value={value}
         onChange={e => onChange(e)}
       />
       <Button
-        variant="outlined"
-        className="bottom-chat-submit-button"
+        variant='outlined'
+        className='bottom-chat-submit-button'
         onClick={() => onClick()}
       >
         submit
@@ -62,7 +64,7 @@ class Chat extends Component {
       this.state.socket.on('getChallenge', data => {
         console.log('challenge:', data);
         setTimeout(() => {
-          this.setState({ isModalVisible: true });
+          this.setState({ values: data, isModalVisible: true });
         }, 10000);
       });
     });
@@ -94,14 +96,20 @@ class Chat extends Component {
     this.setState({ isModalVisible: false });
   };
 
+  fowardToGame = () => {
+    history.push('/game');
+  };
+
   render() {
     return (
-      <div className="Chat">
+      <div className='Chat'>
         <RewardModal
           isVisible={this.state.isModalVisible}
           handleCloseModal={this.handleCloseModal}
+          values={this.state.values}
+          fowardToGame={this.fowardToGame}
         />
-        <div className="chat-messages">
+        <div className='chat-messages'>
           {this.state.messages.map(m => (
             <ChatBubble key={m.mid} user={m.user} message={m.message} />
           ))}

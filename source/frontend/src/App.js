@@ -83,7 +83,7 @@ class App extends Component {
     return (
       <Router history={history}>
         <Switch>
-          <SecretRoute exact path='/' component={Home} />
+          <SecretRoute exact path='/' component={Chat} />
           <SecretRoute exact path='/faq' component={FAQ} />
           <SecretRoute exact path='/chat' component={Chat} />
           <SecretRoute exact path='/game' component={Game} />
