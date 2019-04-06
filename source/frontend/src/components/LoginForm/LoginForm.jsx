@@ -3,6 +3,8 @@ import './LoginForm.sass';
 
 import history from '../../history';
 
+import FormHeader from '../FormHeader/FormHeader';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -47,6 +49,7 @@ class LoginForm extends Component {
     const { username, password } = this.state;
     return (
       <div className='LoginForm'>
+        <FormHeader />
         <TextField
           label='Username'
           className='TextField'
