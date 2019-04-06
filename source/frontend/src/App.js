@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.sass';
 import 'typeface-roboto';
 
+import io from 'socket.io-client';
+
 import history from './history';
 
 import globalStore from './stores/GlobalStore';
@@ -25,6 +27,13 @@ class App extends Component {
   state = {
     loggedIn: globalStore.loggedIn
   };
+
+  componentDidMount() {
+    const socket = io('http://localhost:8080');
+    socket.on('connect', function(data) {
+      socket.emit('join', 'Hello World from client');
+    });
+  }
 
   componentWillMount() {
     globalStore.on('user_logged_in', this.login);
@@ -54,24 +63,24 @@ class App extends Component {
               <BottomNav />
             </div>
           ) : window.location.pathname == '/register' ? (
-            <Route exact path='/register' component={RegisterForm} />
+            <Route exact path="/register" component={RegisterForm} />
           ) : window.location.pathname != '/login' ? (
-            <Redirect to='/login' />
+            <Redirect to="/login" />
           ) : (
-            <Route exact path='/login' component={LoginForm} />
+            <Route exact path="/login" component={LoginForm} />
           )
         }
       />
     );
 
     return (
-      <div className='App'>
+      <div className="App">
         <Router history={history}>
           <Switch>
-            <SecretRoute exact path='/' component={Home} />
-            <SecretRoute exact path='/faq' component={FAQ} />
-            <SecretRoute exact path='/chat' component={Chat} />
-            <SecretRoute exact path='/game' component={Game} />
+            <SecretRoute exact path="/" component={Home} />
+            <SecretRoute exact path="/faq" component={FAQ} />
+            <SecretRoute exact path="/chat" component={Chat} />
+            <SecretRoute exact path="/game" component={Game} />
             <SecretRoute component={NotFoundContainer} />
           </Switch>
         </Router>

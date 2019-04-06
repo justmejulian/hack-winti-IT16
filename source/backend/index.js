@@ -5,13 +5,29 @@ const bodyParser = require('body-parser');
 const Datastore = require('nedb');
 const db = new Datastore({ filename: 'path/to/datafile' });
 const uuidv1 = require('uuid/v1');
+const cors = require('cors');
+
+const server = require('http').createServer(app);
+const socket = require('socket.io');
+
+const io = socket.listen(server);
+
+io.on('connection', function(client) {
+  console.log('Client connected...');
+
+  client.on('join', function(data) {
+    console.log(data);
+  });
+});
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // CORS
 app.all('/*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Credentials', 'true');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -94,13 +110,17 @@ function isRegisterAllowed({ username, password }) {
   });
 }
 
-// START APP
-const server = app.listen(8080, () => {
-  const host = server.address().address;
-  const port = server.address().port;
-
-  console.log(`Example app listening at http://${host}:${port}`);
+const port = 8080;
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
+// START APP
+// app.listen(8080, () => {
+//   // const host = server.address().address;
+//   // const port = server.address().port;
+
+//   console.log(`Server listening`);
+// });
 
 // nedb-test insert
 app.post('/send-message', (req, res) => {
