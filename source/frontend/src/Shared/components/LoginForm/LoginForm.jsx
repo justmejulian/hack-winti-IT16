@@ -8,8 +8,8 @@ import FormHeader from '../FormHeader/FormHeader';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import globalStore from '../../stores/GlobalStore';
-import { loginAction } from '../../actions/GlobalActions';
+import globalStore from '../../../Shared/stores/GlobalStore';
+import { loginAction } from '../../../Shared/actions/GlobalActions';
 
 class LoginForm extends Component {
   state = {

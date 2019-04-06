@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import './FormHeader.sass';
 
-import logo from '../../assets/img/logo.png';
-import mobileLogo from '../../assets/img/mobile_logo.png';
+import logo from '../../../Shared/assets/img/logo.png';
+import mobileLogo from '../../../Shared/assets/img/mobile_logo.png';
 
 class FormHeader extends Component {
   state = {};
