@@ -223,8 +223,12 @@ io.on('connection', function(con) {
   console.log('Client connected...');
   con.on('message', data => {
     console.log('message received', data);
-    persistChat(data.message);
+    // persistChat(data.message);
     con.to('room').emit('getMsg', data.message, data.chatId);
+  });
+  con.on('challenge', data => {
+    console.log('challenge received', data);
+    con.to('room').emit('getChallenge', data.challenge);
   });
 });
 

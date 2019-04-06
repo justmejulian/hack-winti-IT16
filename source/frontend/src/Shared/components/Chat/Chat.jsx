@@ -56,6 +56,12 @@ class Chat extends Component {
           messages: [...prevState.messages, data]
         }));
       });
+      this.state.socket.on('getChallenge', data => {
+        console.log('challenge:', data);
+        setTimeout(() => {
+          //TODO: show duys modal with setState
+        }, 10000);
+      });
     });
   }
 
