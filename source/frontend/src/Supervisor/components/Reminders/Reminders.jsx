@@ -5,6 +5,9 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import './Reminders.sass';
 
 class Reminders extends Component {
@@ -15,40 +18,93 @@ class Reminders extends Component {
   };
 
   render() {
+    const { eventname, info } = this.state;
     return (
-      <div className="Reminders">
+      <div className='Reminders'>
         <h1>Reminders</h1>
-        <div className="Reminders-Questions">
+        <div className='Reminders-Questions'>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className="heading">Where do I find the chat to communicate with my social worker?</Typography>
+              <Typography className='heading'>
+                Mike Interview 8.04.19 12:00
+              </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-                The chat is located in the navigation bar. Just click on the chat symbol.
+                Mike needs to be at Technopark in Winterthur at 13. Docs: CV,
+                Reports
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className="heading">What should I do if I want to talk to my social worker in person?</Typography>
+              <Typography className='heading'>
+                John Interview 17.07.19 7:00
+              </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-                The best way is to call him/her and set up an appointment.
+                Mike needs to be at TCI in Zurich at 8. Suit is a must. Docs: CV
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className="heading">Do you have any further questions?</Typography>
+              <Typography className='heading'>
+                Daniel Daily Morning Wake up / Checkin 7:00
+              </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <Typography>
-                Just call the following number: +411234567
-              </Typography>
+              <Typography>Daniel can't miss one more day of school.</Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
+          <h1>Create new Event</h1>
+          <div className='ReminderForm'>
+            <TextField
+              label='Event Name'
+              className='TextField'
+              type='user'
+              autoComplete='user'
+              margin='normal'
+              variant='outlined'
+              name='eventname'
+              value={eventname}
+              onChange={this.handleInput}
+            />
+            <TextField
+              label='More Info'
+              className='TextField'
+              type='text'
+              name='info'
+              margin='normal'
+              variant='outlined'
+              value={info}
+              onChange={this.handleInput}
+            />
+            <TextField
+              label='Date'
+              className='TextField'
+              type='text'
+              name='info'
+              margin='normal'
+              variant='outlined'
+              value={info}
+              onChange={this.handleInput}
+            />
+            <TextField
+              label='Time'
+              className='TextField'
+              type='text'
+              name='info'
+              margin='normal'
+              variant='outlined'
+              value={info}
+              onChange={this.handleInput}
+            />
+          </div>
+          <Button variant='outlined' x onClick={this.handleLogin}>
+            Create Event
+          </Button>
         </div>
       </div>
     );

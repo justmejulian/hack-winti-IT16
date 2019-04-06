@@ -87,7 +87,7 @@ class App extends Component {
           <SecretRoute exact path='/faq' component={FAQ} />
           <SecretRoute exact path='/chat' component={Chat} />
           <SecretRoute exact path='/game' component={Game} />
-          <SecretRoute exact path='/reminders' component={Reminders} />
+          <SecretRoute exact path='/reminder' component={Reminders} />
           <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>

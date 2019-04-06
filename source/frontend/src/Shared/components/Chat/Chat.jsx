@@ -19,19 +19,19 @@ const ChatBubble = ({ user, message }) => {
 
 const ChatInput = ({ value, onChange, onClick }) => {
   return (
-    <div className="bottom-chat-input">
+    <div className='bottom-chat-input'>
       <TextField
-        className="MessageInput"
-        name="message"
-        autoComplete="user"
-        margin="normal"
-        variant="outlined"
+        className='MessageInput'
+        name='message'
+        autoComplete='user'
+        margin='normal'
+        variant='outlined'
         value={value}
         onChange={e => onChange(e)}
       />
       <Button
-        variant="outlined"
-        className="bottom-chat-submit-button"
+        variant='outlined'
+        className='bottom-chat-submit-button'
         onClick={() => onClick()}
       >
         submit
@@ -83,9 +83,8 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="Chat">
-        <h1>Chat</h1>
-        <div className="chat-messages">
+      <div className='Chat'>
+        <div className='chat-messages'>
           {this.state.messages.map(m => (
             <ChatBubble key={m.mid} user={m.user} message={m.message} />
           ))}
