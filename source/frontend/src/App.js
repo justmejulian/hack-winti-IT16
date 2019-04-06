@@ -51,7 +51,7 @@ class App extends Component {
   login = () => {
     this.setState({
       loggedIn: globalStore.loggedIn,
-      userType: 'Supervisor'
+      userType: 'client'
     });
   };
 
@@ -70,7 +70,7 @@ class App extends Component {
                 <BottomNav />
               </div>
             ) : (
-              <div className={'App'}>
+              <div className={'App Supervisor'}>
                 <SimpleAppBar title="Social Helper" />
                 <Sidebar />
                 <Component {...props} className="content" />
