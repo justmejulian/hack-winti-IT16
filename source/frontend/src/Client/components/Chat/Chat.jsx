@@ -50,6 +50,9 @@ class Chat extends Component {
   };
 
   submitChatInput = () => {
+    if (!this.state.chatInput) {
+      return;
+    }
     const newMessage = { user: 'me', message: this.state.chatInput };
     this.setState(prevState => ({
       chatInput: '',
