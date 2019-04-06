@@ -9,6 +9,7 @@ import WorkIcon from '@material-ui/icons/Work';
 import ClockIcon from '@material-ui/icons/WatchLater';
 import Divider from '@material-ui/core/Divider';
 import './Game.sass';
+import RewardModal from '../RewardModal/RewardModal';
 
 const styles = theme => ({
   root: {
@@ -19,25 +20,43 @@ const styles = theme => ({
 });
 
 class Game extends Component {
-  state = {};
+  state = { rewardModalVisible: true };
 
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
+  showRewardModal = () => {
+    this.setState({ rewardModalVisible: true });
+  };
+
+  playFancyAnimation = () => {
+    // do some fancy animation for collecting reward, then dismiss modal
+    this.setState({ rewardModalVisible: false });
+  };
+
+  dismissRewardModal = () => {
+    this.setState({ rewardModalVisible: false });
+  };
+
   render() {
     return (
-      <div className="Game">
+      <div className='Game'>
+        <RewardModal
+          visible={this.state.rewardModalVisible}
+          playAnimation={this.playFancyAnimation}
+          onClose={this.dismissRewardModal}
+        />
         <h1>Game</h1>
-        <div className="Score">Your Score: 42</div>
+        <div className='Score'>Your Score: 42</div>
         <List className={styles.root}>
           <ListItem>
             <Avatar>
               <AlarmIcon />
             </Avatar>
             <ListItemText
-              primary="Woke up on time"
-              secondary="April 5, 2019 | 8 Points"
+              primary='Woke up on time'
+              secondary='April 5, 2019 | 8 Points'
             />
           </ListItem>
           <Divider />
@@ -46,8 +65,8 @@ class Game extends Component {
               <WorkIcon />
             </Avatar>
             <ListItemText
-              primary="Attended a job interview"
-              secondary="April 2, 2019 | 22 Points"
+              primary='Attended a job interview'
+              secondary='April 2, 2019 | 22 Points'
             />
           </ListItem>
           <Divider />
@@ -56,8 +75,8 @@ class Game extends Component {
               <ClockIcon />
             </Avatar>
             <ListItemText
-              primary="Arrived on time"
-              secondary="March 30, 2019 | 12 Points"
+              primary='Arrived on time'
+              secondary='March 30, 2019 | 12 Points'
             />
           </ListItem>
           <Divider />
