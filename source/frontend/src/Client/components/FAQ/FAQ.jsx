@@ -25,7 +25,7 @@ class FAQ extends Component {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-                The chat is located in the button bar. Just click on the chat symbol.
+                The chat is located in the navigation bar. Just click on the chat symbol.
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
