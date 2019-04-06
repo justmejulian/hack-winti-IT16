@@ -15,13 +15,13 @@ import './Chat.sass';
 const ChatBubble = ({ user, message }) => {
   console.log(user);
   const bubbleOwner =
-    user.valueOf() == globalStore.uuid.valueOf()
+    user.valueOf() === globalStore.uuid.valueOf()
       ? 'blue-chat-bubble'
       : 'white-chat-bubble';
   return <span className={bubbleOwner}>{message}</span>;
 };
 
-const ChatInput = ({ value, onChange, onClick }) => {
+const ChatInput = ({ value, onChange, onClick, onKeyPress }) => {
   return (
     <div className='bottom-chat-input'>
       <TextField
@@ -32,6 +32,7 @@ const ChatInput = ({ value, onChange, onClick }) => {
         variant='outlined'
         value={value}
         onChange={e => onChange(e)}
+        onKeyPress={e => onKeyPress(e)}
       />
       <Button
         variant='outlined'
@@ -69,6 +70,12 @@ class Chat extends Component {
       });
     });
   }
+
+  handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.submitChatInput();
+    }
+  };
 
   handleInputChange = e => {
     this.setState({ chatInput: e.target.value });
@@ -117,6 +124,7 @@ class Chat extends Component {
 
         <ChatInput
           value={this.state.chatInput}
+          onKeyPress={this.handleKeyPress}
           onChange={this.handleInputChange}
           onClick={this.submitChatInput}
         />
