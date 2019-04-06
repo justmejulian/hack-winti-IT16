@@ -111,16 +111,10 @@ function isRegisterAllowed({ username, password }) {
 }
 
 const port = 8080;
+
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-// START APP
-// app.listen(8080, () => {
-//   // const host = server.address().address;
-//   // const port = server.address().port;
-
-//   console.log(`Server listening`);
-// });
 
 // nedb-test insert
 app.post('/send-message', (req, res) => {

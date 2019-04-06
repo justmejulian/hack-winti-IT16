@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.sass';
 import 'typeface-roboto';
 
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import socket from './socket';
 
 import history from './history';
 
@@ -29,7 +30,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const socket = io('http://localhost:8080');
     socket.on('connect', function(data) {
       socket.emit('join', 'Hello World from client');
     });
