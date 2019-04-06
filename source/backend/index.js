@@ -17,6 +17,18 @@ const dbUsers = new Datastore({ filename: 'db/users' });
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(express.static(__dirname + '/build'));
+
+// process.env.NODE_ENV = 'production';
+console.log(process.env.NODE_ENV);
+
+// only used in production, bundle contains frontend build
+if (process.env.NODE_ENV === 'production') {
+  app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+  });
+}
+
 // CORS
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
