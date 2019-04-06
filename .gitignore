@@ -18,3 +18,4 @@ reports/test-report.xml
 node_modules
 
 /source/backend/path/*
+/source/backend/db/*

@@ -33,6 +33,7 @@ class RegisterForm extends Component {
   };
 
   handleInput = e => {
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -45,7 +46,7 @@ class RegisterForm extends Component {
           label='Username'
           className='TextField'
           type='user'
-          name='userName'
+          name='username'
           autoComplete='user'
           margin='normal'
           variant='outlined'
