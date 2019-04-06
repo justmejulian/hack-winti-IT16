@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const Datastore = require('nedb');
 const db = new Datastore({ filename: 'path/to/datafile' });
+const uuidv1 = require('uuid/v1');
 
 app.use(bodyParser.json());
 
@@ -26,6 +27,7 @@ db.loadDatabase(function(err) {
 // REGISTER NEW USER
 app.post('/api/auth/register', async function(req, res) {
   const registerDetails = {
+    uuid: uuidv1(),
     username: req.body.username,
     password: req.body.password
   };
