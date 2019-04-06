@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.sass';
 import 'typeface-roboto';
 
+import socket from './socket';
+
 import history from './Shared/history';
 
 import globalStore from './Shared/stores/GlobalStore';
@@ -31,6 +33,12 @@ class App extends Component {
     loggedIn: globalStore.loggedIn,
     userType: ''
   };
+
+  componentDidMount() {
+    socket.on('connect', function(data) {
+      socket.emit('join', 'Hello World from client');
+    });
+  }
 
   componentWillMount() {
     globalStore.on('user_logged_in', this.login);
@@ -63,34 +71,32 @@ class App extends Component {
               </div>
             ) : (
               <div className={'App'}>
-                <SimpleAppBar title='Social Helper' />
+                <SimpleAppBar title="Social Helper" />
                 <Sidebar />
-                <Component {...props} className='content' />
+                <Component {...props} className="content" />
               </div>
             )
           ) : window.location.pathname == '/register' ? (
-            <Route exact path='/register' component={RegisterForm} />
+            <Route exact path="/register" component={RegisterForm} />
           ) : window.location.pathname != '/login' ? (
-            <Redirect to='/login' />
+            <Redirect to="/login" />
           ) : (
-            <Route exact path='/login' component={LoginForm} />
+            <Route exact path="/login" component={LoginForm} />
           )
         }
       />
     );
 
     return (
-      <div>
-        <Router history={history}>
-          <Switch>
-            <SecretRoute exact path='/' component={Home} />
-            <SecretRoute exact path='/faq' component={FAQ} />
-            <SecretRoute exact path='/chat' component={Chat} />
-            <SecretRoute exact path='/game' component={Game} />
-            <SecretRoute component={NotFoundContainer} />
-          </Switch>
-        </Router>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <SecretRoute exact path="/" component={Home} />
+          <SecretRoute exact path="/faq" component={FAQ} />
+          <SecretRoute exact path="/chat" component={Chat} />
+          <SecretRoute exact path="/game" component={Game} />
+          <SecretRoute component={NotFoundContainer} />
+        </Switch>
+      </Router>
     );
   }
 }
