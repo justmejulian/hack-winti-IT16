@@ -11,15 +11,6 @@ const socket = require('socket.io');
 
 const io = socket.listen(server);
 
-io.on('connection', function(con) {
-  con.join('room');
-  console.log('Client connected...');
-  con.on('message', data => {
-    console.log('message received', data);
-    con.to('room').emit('getMsg', data.message);
-  });
-});
-
 const dbChats = new Datastore({ filename: 'db/chats' });
 const dbUsers = new Datastore({ filename: 'db/users' });
 
@@ -226,3 +217,26 @@ app.get('/get-messages/:uid', (req, res) => {
 //     });
 //   });
 // });
+
+io.on('connection', function(con) {
+  con.join('room');
+  console.log('Client connected...');
+  con.on('message', data => {
+    console.log('message received', data);
+    persistChat(data.message);
+    con.to('room').emit('getMsg', data.message, data.chatId);
+  });
+});
+
+function persistChat(message) {
+  console.log(message);
+  dbChats.findOne({ chatId: '12' }, (err, document) => {
+    if (document) {
+      console.log(document);
+      dbChats.update({ chatId: '12' }, { $push: { messages: message } });
+    } else {
+      console.log('should create new chat');
+      dbChats.insert({ chatId: '12', messages: [message] });
+    }
+  });
+}
