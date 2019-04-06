@@ -2,24 +2,27 @@ import React, { Component } from 'react';
 import './App.sass';
 import 'typeface-roboto';
 
-import history from '../Shared/history';
+import history from './Shared/history';
 
-import globalStore from '../Shared/stores/GlobalStore';
-import { loginAction } from '../Shared/actions/GlobalActions';
+import globalStore from './Shared/stores/GlobalStore';
+import { loginAction } from './Shared/actions/GlobalActions';
 
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import SimpleAppBar from './components/SimpleAppBar/SimpleAppBar';
-import Sidebar from './components/Sidebar/Sidebar';
+import SupervisorSimpleAppBar from './Supervisor/components/SimpleAppBar/SimpleAppBar';
+import Sidebar from './Supervisor/components/Sidebar/Sidebar';
 
-import NotFoundContainer from './components/NotFoundContainer/NotFoundContainer';
+import SimpleAppBar from './Client/components/SimpleAppBar/SimpleAppBar';
+import BottomNav from './Client/components/BottomNav/BottomNav';
 
-import Home from './components/Home/Home';
-import Game from './components/Game/Game';
-import FAQ from './components/FAQ/FAQ';
-import Chat from './components/Chat/Chat';
-import RegisterForm from '../Shared/components/RegisterForm/RegisterForm';
-import LoginForm from '../Shared/components/LoginForm/LoginForm';
+import NotFoundContainer from './Supervisor/components/NotFoundContainer/NotFoundContainer';
+
+import Home from './Supervisor/components/Home/Home';
+import Game from './Supervisor/components/Game/Game';
+import FAQ from './Supervisor/components/FAQ/FAQ';
+import Chat from './Supervisor/components/Chat/Chat';
+import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
+import LoginForm from './Shared/components/LoginForm/LoginForm';
 
 class App extends Component {
   state = {
@@ -36,7 +39,8 @@ class App extends Component {
 
   login = () => {
     this.setState({
-      loggedIn: globalStore.loggedIn
+      loggedIn: globalStore.loggedIn,
+      userType: 'client'
     });
   };
 
@@ -48,11 +52,19 @@ class App extends Component {
         {...rest}
         render={props =>
           this.state.loggedIn != '' ? (
-            <div className={'App'}>
-              <SimpleAppBar title='Social Helper' />
-              <Sidebar />
-              <Component {...props} className='content' />
-            </div>
+            this.state.userType === 'client' ? (
+              <div className={'App'}>
+                <SimpleAppBar />
+                <Component {...props} />
+                <BottomNav />
+              </div>
+            ) : (
+              <div className={'App'}>
+                <SimpleAppBar title='Social Helper' />
+                <Sidebar />
+                <Component {...props} className='content' />
+              </div>
+            )
           ) : window.location.pathname == '/register' ? (
             <Route exact path='/register' component={RegisterForm} />
           ) : window.location.pathname != '/login' ? (
