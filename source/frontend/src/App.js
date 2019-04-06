@@ -17,16 +17,19 @@ import BottomNav from './Client/components/BottomNav/BottomNav';
 
 import NotFoundContainer from './Supervisor/components/NotFoundContainer/NotFoundContainer';
 
-import Home from './Supervisor/components/Home/Home';
-import Game from './Supervisor/components/Game/Game';
-import FAQ from './Supervisor/components/FAQ/FAQ';
-import Chat from './Supervisor/components/Chat/Chat';
+import Home from './Shared/components/Home/Home';
+
+import Game from './Client/components/Game/Game';
+import FAQ from './Client/components/FAQ/FAQ';
+import Chat from './Client/components/Chat/Chat';
+
 import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
 import LoginForm from './Shared/components/LoginForm/LoginForm';
 
 class App extends Component {
   state = {
-    loggedIn: globalStore.loggedIn
+    loggedIn: globalStore.loggedIn,
+    userType: ''
   };
 
   componentWillMount() {
@@ -53,24 +56,24 @@ class App extends Component {
         render={props =>
           this.state.loggedIn != '' ? (
             this.state.userType === 'client' ? (
-              <div className={'App'}>
+              <div className={'App Client'}>
                 <SimpleAppBar />
                 <Component {...props} />
                 <BottomNav />
               </div>
             ) : (
-              <div className={'App'}>
-                <SimpleAppBar title="Social Helper" />
+              <div className={'App Supervisor'}>
+                <SimpleAppBar title='Social Helper' />
                 <Sidebar />
-                <Component {...props} className="content" />
+                <Component {...props} className='content' />
               </div>
             )
           ) : window.location.pathname == '/register' ? (
-            <Route exact path="/register" component={RegisterForm} />
+            <Route exact path='/register' component={RegisterForm} />
           ) : window.location.pathname != '/login' ? (
-            <Redirect to="/login" />
+            <Redirect to='/login' />
           ) : (
-            <Route exact path="/login" component={LoginForm} />
+            <Route exact path='/login' component={LoginForm} />
           )
         }
       />
@@ -79,10 +82,10 @@ class App extends Component {
     return (
       <Router history={history}>
         <Switch>
-          <SecretRoute exact path="/" component={Home} />
-          <SecretRoute exact path="/faq" component={FAQ} />
-          <SecretRoute exact path="/chat" component={Chat} />
-          <SecretRoute exact path="/game" component={Game} />
+          <SecretRoute exact path='/' component={Home} />
+          <SecretRoute exact path='/faq' component={FAQ} />
+          <SecretRoute exact path='/chat' component={Chat} />
+          <SecretRoute exact path='/game' component={Game} />
           <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>

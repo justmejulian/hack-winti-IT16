@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import './Sidebar.sass';
 
+import globalStore from '../../../Shared/stores/GlobalStore';
+import { logoutAction } from '../../../Shared/actions/GlobalActions';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -16,8 +19,8 @@ import Home from '@material-ui/icons/Home';
 class Sidebar extends Component {
   state = {};
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleLogout = event => {
+    logoutAction();
   };
 
   render() {
@@ -34,22 +37,12 @@ class Sidebar extends Component {
             <ListItemIcon>
               <SupervisorAccount />
             </ListItemIcon>
-            <ListItemText primary='FAQ' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <Chat />
-            </ListItemIcon>
-            <ListItemText primary='Chats' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <VideogameAsset />
-            </ListItemIcon>
-            <ListItemText primary='Game' />
+            <ListItemText primary='Clients' />
           </ListItem>
         </List>
-        <Button variant='outlined'>Logout</Button>
+        <Button variant='outlined' onClick={this.handleLogout}>
+          Logout
+        </Button>
       </div>
     );
   }

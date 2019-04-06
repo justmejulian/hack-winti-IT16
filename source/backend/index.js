@@ -180,6 +180,24 @@ app.get('/api/get-messages/:sid/:uid', (req, res) => {
 
 const port = 8080;
 
+// GAMIFICATION
+app.post('/api/set-user-score/:uid/', (req, res) => {
+  const uid = req.params.uid;
+  const score = req.body.score;
+  dbUsers.update(
+    { uuid: uid },
+    { $set: { score: score } },
+    { multi: false },
+    function(err, numReplaced) {
+      if (numReplaced === 1) {
+        res.status(200).json('update successful');
+      } else {
+        res.status(400).json('update not successful');
+      }
+    }
+  );
+});
+
 // START APP
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
