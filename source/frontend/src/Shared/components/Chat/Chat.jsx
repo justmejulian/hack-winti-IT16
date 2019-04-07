@@ -50,6 +50,7 @@ class Chat extends Component {
     chatInput: '',
     isModalVisible: false,
     socket: io('http://localhost:8080')
+    //socket: io(window.location.origin)
   };
 
   componentDidMount() {

@@ -28,7 +28,7 @@ class BottomNav extends Component {
         history.push('/faq');
         break;
       case 2:
-        history.push('/chat');
+        history.push('/');
         break;
       case 3:
         history.push('/game');
