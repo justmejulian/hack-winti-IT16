@@ -12,6 +12,8 @@ import Chat from '@material-ui/icons/Chat';
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 import Home from '@material-ui/icons/Home';
 
+import FileUpload from '@material-ui/icons/AttachFile';
+
 class BottomNav extends Component {
   state = {
     value: 0
@@ -22,16 +24,16 @@ class BottomNav extends Component {
     // eslint-disable-next-line default-case
     switch (value) {
       case 0:
-        history.push('/file');
+        history.push('/');
         break;
       case 1:
         history.push('/faq');
         break;
       case 2:
-        history.push('/');
+        history.push('/game');
         break;
       case 3:
-        history.push('/game');
+        history.push('/file');
         break;
     }
     //globalActions.setViewState(value);
@@ -51,8 +53,8 @@ class BottomNav extends Component {
           classes={{
             selected: 'BottomNavigationAction-selected'
           }}
-          label='Home'
-          icon={<Home />}
+          label='Chat'
+          icon={<Chat />}
         />
         <BottomNavigationAction
           classes={{
@@ -65,15 +67,15 @@ class BottomNav extends Component {
           classes={{
             selected: 'BottomNavigationAction-selected'
           }}
-          label='Chat'
-          icon={<Chat />}
+          label='Game'
+          icon={<VideogameAsset />}
         />
         <BottomNavigationAction
           classes={{
             selected: 'BottomNavigationAction-selected'
           }}
-          label='Game'
-          icon={<VideogameAsset />}
+          label='FileUpload'
+          icon={<FileUpload />}
         />
       </BottomNavigation>
     );
