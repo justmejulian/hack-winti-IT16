@@ -6,7 +6,9 @@ const Datastore = require('nedb');
 const uuidv1 = require('uuid/v1');
 const cors = require('cors');
 
-const server = require('http').createServer(app);
+const fileUpload = require('express-fileupload');
+
+let server = require('http').createServer(app);
 const socket = require('socket.io');
 
 const io = socket.listen(server);
@@ -32,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 // CORS
 app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  //res.header('Access-Control-Allow-Origin', window.location.origin + ':3000');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header(
@@ -39,6 +42,27 @@ app.all('/*', (req, res, next) => {
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
   next();
+});
+
+// default options
+app.use(fileUpload());
+
+app.post('/upload', function(req, res) {
+  if (Object.keys(req.files).length == 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.sampleFile;
+
+  let uploadPath = __dirname + '/uploads/' + sampleFile.name;
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(uploadPath, function(err) {
+    if (err) return res.status(500).send(err);
+
+    res.send('File uploaded to ' + uploadPath);
+  });
 });
 
 dbUsers.loadDatabase(function(err) {
@@ -198,7 +222,9 @@ app.post('/api/set-user-score/:uid/', (req, res) => {
 });
 
 // START APP
-server.listen(port, () => {
+server = app.listen(8080, () => {
+  const host = server.address().address;
+  const port = server.address().port;
   console.log(`Server listening on port ${port}`);
 });
 

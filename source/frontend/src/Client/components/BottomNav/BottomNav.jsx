@@ -22,13 +22,13 @@ class BottomNav extends Component {
     // eslint-disable-next-line default-case
     switch (value) {
       case 0:
-        history.push('/');
+        history.push('/file');
         break;
       case 1:
         history.push('/faq');
         break;
       case 2:
-        history.push('/chat');
+        history.push('/');
         break;
       case 3:
         history.push('/game');

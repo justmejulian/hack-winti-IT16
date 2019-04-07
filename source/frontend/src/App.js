@@ -24,6 +24,8 @@ import Game from './Client/components/Game/Game';
 import FAQ from './Client/components/FAQ/FAQ';
 import Chat from './Shared/components/Chat/Chat';
 
+import FileUpload from './Client/components/FileUpload/FileUpload';
+
 import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
 import LoginForm from './Shared/components/LoginForm/LoginForm';
 
@@ -85,9 +87,9 @@ class App extends Component {
         <Switch>
           <SecretRoute exact path='/' component={Chat} />
           <SecretRoute exact path='/faq' component={FAQ} />
-          <SecretRoute exact path='/chat' component={Chat} />
           <SecretRoute exact path='/game' component={Game} />
           <SecretRoute exact path='/reminder' component={Reminders} />
+          <SecretRoute exact path='/file' component={FileUpload} />
           <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>

@@ -1,7 +1,9 @@
 const GET = 'GET';
 const POST = 'POST';
 const HEADERS = { 'Content-Type': 'application/json' };
-const BASE_URL = 'http://localhost:8080/api';
+let BASE_URL = 'http://localhost:8080/api';
+// if (process.env.NODE_ENV === 'production')
+//let BASE_URL = window.location.origin + '/api';
 
 export const registerUser = async user => {
   return new Promise(async (resolve, reject) => {

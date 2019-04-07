@@ -20,6 +20,7 @@ class Reminders extends Component {
     date: '',
     time: '',
     socket: io('http://localhost:8080')
+    //socket: io('window.location.origin')
   };
 
   componentDidMount() {
@@ -61,12 +62,12 @@ class Reminders extends Component {
   render() {
     const { eventname, info } = this.state;
     return (
-      <div className="Reminders">
+      <div className='Reminders'>
         <h1>Reminders</h1>
-        <div className="Reminders-Questions">
+        <div className='Reminders-Questions'>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className="heading">
+              <Typography className='heading'>
                 Mike Interview 8.04.19 12:00
               </Typography>
             </ExpansionPanelSummary>
@@ -79,7 +80,7 @@ class Reminders extends Component {
           </ExpansionPanel>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className="heading">
+              <Typography className='heading'>
                 John Interview 17.07.19 7:00
               </Typography>
             </ExpansionPanelSummary>
@@ -91,7 +92,7 @@ class Reminders extends Component {
           </ExpansionPanel>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className="heading">
+              <Typography className='heading'>
                 Daniel Daily Morning Wake up / Checkin 7:00
               </Typography>
             </ExpansionPanelSummary>
@@ -100,50 +101,50 @@ class Reminders extends Component {
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <h1>Create new Event</h1>
-          <div className="ReminderForm">
+          <div className='ReminderForm'>
             <TextField
-              label="Event Name"
-              className="TextField"
-              type="user"
-              autoComplete="user"
-              margin="normal"
-              variant="outlined"
-              name="eventname"
+              label='Event Name'
+              className='TextField'
+              type='user'
+              autoComplete='user'
+              margin='normal'
+              variant='outlined'
+              name='eventname'
               value={eventname}
               onChange={this.handleInput}
             />
             <TextField
-              label="More Info"
-              className="TextField"
-              type="text"
-              name="detail"
-              margin="normal"
-              variant="outlined"
+              label='More Info'
+              className='TextField'
+              type='text'
+              name='detail'
+              margin='normal'
+              variant='outlined'
               value={info}
               onChange={this.handleInput}
             />
             <TextField
-              label="Date"
-              className="TextField"
-              type="text"
-              name="date"
-              margin="normal"
-              variant="outlined"
+              label='Date'
+              className='TextField'
+              type='text'
+              name='date'
+              margin='normal'
+              variant='outlined'
               value={info}
               onChange={this.handleInput}
             />
             <TextField
-              label="Time"
-              className="TextField"
-              type="text"
-              name="time"
-              margin="normal"
-              variant="outlined"
+              label='Time'
+              className='TextField'
+              type='text'
+              name='time'
+              margin='normal'
+              variant='outlined'
               value={info}
               onChange={this.handleInput}
             />
           </div>
-          <Button variant="outlined" x onClick={this.handleCreate}>
+          <Button variant='outlined' x onClick={this.handleCreate}>
             Create Event
           </Button>
         </div>
