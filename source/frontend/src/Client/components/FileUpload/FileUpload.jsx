@@ -23,7 +23,7 @@ class FileUpload extends Component {
       const formData = new FormData();
       formData.append('file', file, file.name);
 
-      req.open('POST', B_URL +'/upload');
+      req.open('POST', B_URL + '/upload');
       req.send(formData);
     });
   };
@@ -74,9 +74,8 @@ class FileUpload extends Component {
   render() {
     const uploadUrl = `${B_URL}/upload`;
     return (
-      <div className="FileUpload">
+      <div className='FileUpload'>
         <h1>FileUpload</h1>
-<<<<<<< HEAD
         <form onSubmit={this.onFormSubmit}>
           <input type='file' name='sampleFile' onChange={this.onChange} />
 
@@ -86,18 +85,6 @@ class FileUpload extends Component {
             File uploaded to:{' '}
             <a href={'file://' + this.state.url}>{this.state.url}</a>
           </p>
-=======
-        <form
-          ref="uploadForm"
-          id="uploadForm"
-          action={uploadUrl}
-          method="post"
-          encType="multipart/form-data"
-        >
-          <input type="file" name="sampleFile" />
-
-          <input type="submit" value="Upload!" />
->>>>>>> c2e1fd983a277574de97ff98723ba6c2c4d1fb7d
         </form>
       </div>
     );
