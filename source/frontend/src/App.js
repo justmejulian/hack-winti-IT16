@@ -21,7 +21,9 @@ import Reminders from './Supervisor/components/Reminders/Reminders';
 import Home from './Shared/components/Home/Home';
 
 import Game from './Client/components/Game/Game';
+import FileUpload from './Client/components/FileUpload/FileUpload';
 import FAQ from './Client/components/FAQ/FAQ';
+
 import Chat from './Shared/components/Chat/Chat';
 
 import RegisterForm from './Shared/components/RegisterForm/RegisterForm';
@@ -88,6 +90,7 @@ class App extends Component {
           <SecretRoute exact path='/chat' component={Chat} />
           <SecretRoute exact path='/game' component={Game} />
           <SecretRoute exact path='/reminder' component={Reminders} />
+          <SecretRoute exact path='/file' component={FileUpload} />
           <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>
