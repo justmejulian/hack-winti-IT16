@@ -10,6 +10,8 @@ import RewardModal from '../../../Client/components/RewardModal/RewardModal';
 import io from 'socket.io-client';
 import globalStore from '../../../Shared/stores/GlobalStore';
 
+import { B_URL } from '../../../config';
+
 import './Chat.sass';
 
 const ChatBubble = ({ user, message }) => {
@@ -23,20 +25,20 @@ const ChatBubble = ({ user, message }) => {
 
 const ChatInput = ({ value, onChange, onClick, onKeyPress }) => {
   return (
-    <div className='bottom-chat-input'>
+    <div className="bottom-chat-input">
       <TextField
-        className='MessageInput'
-        name='message'
-        autoComplete='user'
-        margin='normal'
-        variant='outlined'
+        className="MessageInput"
+        name="message"
+        autoComplete="user"
+        margin="normal"
+        variant="outlined"
         value={value}
         onChange={e => onChange(e)}
         onKeyPress={e => onKeyPress(e)}
       />
       <Button
-        variant='outlined'
-        className='bottom-chat-submit-button'
+        variant="outlined"
+        className="bottom-chat-submit-button"
         onClick={() => onClick()}
       >
         submit
@@ -49,7 +51,7 @@ class Chat extends Component {
     messages: [],
     chatInput: '',
     isModalVisible: false,
-    socket: io('http://localhost:8080')
+    socket: io(B_URL)
   };
 
   componentDidMount() {
@@ -109,14 +111,14 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className='Chat'>
+      <div className="Chat">
         <RewardModal
           isVisible={this.state.isModalVisible}
           handleCloseModal={this.handleCloseModal}
           values={this.state.values}
           fowardToGame={this.fowardToGame}
         />
-        <div className='chat-messages'>
+        <div className="chat-messages">
           {this.state.messages.map(m => (
             <ChatBubble key={m.mid} user={m.user} message={m.message} />
           ))}
