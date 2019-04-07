@@ -52,7 +52,7 @@ app.post('/upload', function(req, res) {
   }
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let sampleFile = req.files.sampleFile;
+  let sampleFile = req.files.file;
 
   let uploadPath = __dirname + '/uploads/' + sampleFile.name;
 
@@ -60,7 +60,7 @@ app.post('/upload', function(req, res) {
   sampleFile.mv(uploadPath, function(err) {
     if (err) return res.status(500).send(err);
 
-    res.send('File uploaded to ' + uploadPath);
+    res.send(uploadPath);
   });
 });
 
