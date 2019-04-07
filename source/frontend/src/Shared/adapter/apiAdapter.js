@@ -1,7 +1,8 @@
+import { BASE_URL } from '../../config';
+
 const GET = 'GET';
 const POST = 'POST';
 const HEADERS = { 'Content-Type': 'application/json' };
-const BASE_URL = 'http://localhost:8080/api';
 
 export const registerUser = async user => {
   return new Promise(async (resolve, reject) => {

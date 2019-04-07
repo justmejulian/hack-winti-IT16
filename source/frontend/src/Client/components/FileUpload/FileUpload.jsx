@@ -4,6 +4,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { B_URL } from '../../../config';
 
 class FileUpload extends Component {
   state = {};
@@ -13,19 +14,20 @@ class FileUpload extends Component {
   };
 
   render() {
+    const uploadUrl = `${B_URL}/upload`;
     return (
-      <div className='FileUpload'>
+      <div className="FileUpload">
         <h1>FileUpload</h1>
         <form
-          ref='uploadForm'
-          id='uploadForm'
-          action='http://localhost:8080/upload'
-          method='post'
-          encType='multipart/form-data'
+          ref="uploadForm"
+          id="uploadForm"
+          action={uploadUrl}
+          method="post"
+          encType="multipart/form-data"
         >
-          <input type='file' name='sampleFile' />
+          <input type="file" name="sampleFile" />
 
-          <input type='submit' value='Upload!' />
+          <input type="submit" value="Upload!" />
         </form>
       </div>
     );

@@ -13,13 +13,15 @@ import './Reminders.sass';
 import io from 'socket.io-client';
 import globalStore from '../../../Shared/stores/GlobalStore';
 
+import { B_URL } from '../../../config';
+
 class Reminders extends Component {
   state = {
     eventname: '',
     detail: '',
     date: '',
     time: '',
-    socket: io('http://localhost:8080')
+    socket: io(B_URL)
   };
 
   componentDidMount() {
